@@ -1,0 +1,14 @@
+#about-us > div {
+    position:absolute;
+    width:50%
+}
+
+#about-us > div.description {
+    position:absolute;
+    width:50%;
+    left:50%;
+}
+
+#about-us {
+    position:relative;
+}
