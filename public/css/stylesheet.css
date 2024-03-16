@@ -11,6 +11,7 @@ p, button {
 }
 
 
+
 #content {
     display: flex;
     flex-direction: column;
@@ -88,4 +89,8 @@ div.navbar > a:hover, table > tbody > tr > a:hover{
 .footer > p {
     font-size: 15px;
 
+}
+
+a {
+    animation: 2s normal slidein;
 }

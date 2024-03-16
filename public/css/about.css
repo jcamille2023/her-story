@@ -17,10 +17,6 @@
     gap: 5px;
 }
 
-img {
-    width: 33%;
-    height: 33%;
-}
 #header {
     background-repeat: no-repeat;
     background-size: cover;
@@ -50,7 +46,9 @@ img {
 }
 
 .member > div > img {
-    width: 50%;
+    width: 80%;
+    height: auto;
+    border-radius: 50%
 }
 
 button {
