@@ -15,7 +15,8 @@ document.addEventListener("scroll", (event) => {
     }
 });
 
-console.log(body.offsetWidth);
+
+console.log(body.clientWidth);
 console.log(navbar.offsetWidth)
 if (body.offsetWidth < navbar.offsetWidth) {
     let menu_button = document.createElement('a');

@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+body {
+    margin: 0;
+    background-color: #cfbac9;
+}
+
+p, button {
+    font-size: 25px;
+    font-family: 'Raleway';
+}
+
+
+#content {
+    display: flex;
+    flex-direction: column;
+}
+button {
+    background-color: transparent;
+    color: black;
+    border: 2px solid #2a083b;
+    transition-property: background-color;
+    transition-duration: 0.5s;
+    font-size: 25px;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Lato';
+}
+.navbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 20px;
+    /* background: #cfbac9; */
+    width: 90%;
+    text-align: right;
+    transition-property: background-color;
+    transition-duration: 0.3s;
+    z-index: 2;
+}
+
+div.navbar > a, table > tbody > tr > a {
+    color: white;
+    font-size: 20px;
+}
+div.navbar > a {
+    padding: 15px;
+}
+
+table > tbody > tr > a {
+    padding:0px;
+}
+
+table {
+    text-align: center;
+}
+div.navbar > a, table > tbody > tr > a {
+    transition-property: background-color;
+    transition-duration: 0.3s;
+
+}
+
+div.navbar > a:hover, table > tbody > tr > a:hover{
+    background-color:white;
+    color:#000000;
+}
+
+.header {
+    background: linear-gradient(45deg, black, #2a083b);
+    color: white;
+    text-align: center;
+    width:100%;
+    
+}
+
+.footer {
+    position: relative;
+    background-color: black;
+    color: white;
+    bottom: -10%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    
+}
+
+.footer > p {
+    font-size: 15px;
+
+}
