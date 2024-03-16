@@ -41,6 +41,20 @@ if (body.offsetWidth < navbar.offsetWidth) {
             a.setAttribute('href',obj[link]);
             a.innerHTML = link;
             row.appendChild(a);
+            a.animate(
+                [
+                  {
+                    // from
+                    opacity: 0,
+                  },
+                  {
+                    // to
+                    opacity: 1,
+                    color: "#000",
+                  },
+                ],
+                2000,
+              );
         }
         let exit_row = table.insertRow(-1);
         let exit_button = document.createElement('a');
