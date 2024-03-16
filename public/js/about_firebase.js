@@ -23,4 +23,16 @@ const analytics = getAnalytics(app);
 const database = getDatabase();
 const dbRef = ref(database);
 
+get(ref(database, "/members/"), (snapshot) => {
+  let data = snapshot.val();
+  data = Object.values(data);
+  console.log(data);
+  for(member of data) {
+    let name = member.name;
+    let role = member.role;
+    let description = member.bio;
+    let img_url = member.img_url;
+    show_member(name,description,img_url,role);
+  }
+});
 
