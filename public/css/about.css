@@ -22,7 +22,6 @@ img {
     height: 33%;
 }
 #header {
-    background-image: url('../assets/banner.png');
     background-repeat: no-repeat;
     background-size: cover;
     padding-top:10%;
