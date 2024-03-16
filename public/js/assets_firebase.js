@@ -28,7 +28,7 @@ get(child(dbRef, "/assets/")).then((snapshot) => {
   console.log(data);
   let headers = document.getElementsByClassName("header");
   for(let header of headers) {
-    header.style.backgroundImage = "url('" + data.header + "')"; 
+    header.style.backgroundImage = "url('" + data.banner + "')"; 
   }
   let logos = document.getElementsByClassName("logo");
   for(let logo of logos) {
