@@ -1,7 +1,8 @@
 function show_member(name, description, url, role) {
     let element = document.getElementById("members");
+    let container = document.createElement("div");
+    container.classList.add('member');
     let basic = document.createElement("div");
-    basic.classList.add('member');
     let h1 = document.createElement("h1");
     let p_role = document.createElement("p");
     h1.appendChild(document.createTextNode(name));
@@ -15,6 +16,7 @@ function show_member(name, description, url, role) {
     let p_des = document.createElement("p");
     p_des.appendChild(document.createTextNode(description))
     bio.appendChild(p_des);
-    element.appendChild(basic);
-    element.appendChild(bio);
+    container.appendChild(basic);
+    container.appendChild(bio);
+    element.appendChild(container);
 }

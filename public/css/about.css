@@ -41,6 +41,11 @@
     flex-direction: row;
 }
 
+.member > div {
+    display: flex;
+    flex-direction: column;
+}
+
 .member > div > img {
     width: 50%;
 }
