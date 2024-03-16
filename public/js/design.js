@@ -16,7 +16,7 @@ document.addEventListener("scroll", (event) => {
     }
 });
 
-function navbar(links) {
+function add_links(links) {
     console.log(body.clientWidth);
 console.log(navbar.offsetWidth)
 if (body.offsetWidth < navbar.offsetWidth) {
