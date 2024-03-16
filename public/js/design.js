@@ -1,9 +1,10 @@
 let above = true;
+let assets_loaded = false;
 let body = document.scrollingElement;
 let navbar = document.getElementById("navbar");
 
 let header = document.getElementById("header");
-let links = [{"home":'/'},{"about":'/about'},{"blog":'/blog'},{"interviews":'/interviews'}]
+// let links = [{"home":'/'},{"about":'/about'},{"blog":'/blog'},{"interviews":'/interviews'}]
 document.addEventListener("scroll", (event) => {
     if(body.scrollTop + 58 > header.scrollHeight && above == true) {
         above = false;
@@ -15,8 +16,8 @@ document.addEventListener("scroll", (event) => {
     }
 });
 
-
-console.log(body.clientWidth);
+function navbar(links) {
+    console.log(body.clientWidth);
 console.log(navbar.offsetWidth)
 if (body.offsetWidth < navbar.offsetWidth) {
     let menu_button = document.createElement('a');
@@ -66,7 +67,6 @@ else {
         navbar.appendChild(a);
     }
 }
-
-
+}
 
 

@@ -36,3 +36,11 @@ get(child(dbRef, "/assets/")).then((snapshot) => {
   }
 });
 
+get(child(dbRef, "/urls/")).then((snapshot) => {
+    let data = snapshot.val();
+    data = Object.values(data);
+    navbar(data);
+  });
+
+
+
