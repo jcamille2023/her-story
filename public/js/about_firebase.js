@@ -25,6 +25,7 @@ const dbRef = ref(database);
 
 get(ref(database, "/members/"), (snapshot) => {
   let data = snapshot.val();
+  console.log(data);
   data = Object.values(data);
   console.log(data);
   for(member of data) {
