@@ -28,7 +28,7 @@ get(child(dbRef, "/members/")).then((snapshot) => {
   console.log(data);
   data = Object.values(data);
   console.log(data);
-  for(member of data) {
+  for(let member of data) {
     let name = member.name;
     let role = member.role;
     let description = member.bio;
