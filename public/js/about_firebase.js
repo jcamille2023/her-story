@@ -23,7 +23,7 @@ const analytics = getAnalytics(app);
 const database = getDatabase();
 const dbRef = ref(database);
 
-get(child(dbRef, "/members/"), (snapshot) => {
+get(child(dbRef, "/members/")).then((snapshot) => {
   let data = snapshot.val();
   console.log(data);
   data = Object.values(data);
