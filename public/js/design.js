@@ -41,20 +41,24 @@ if (body.offsetWidth < navbar.offsetWidth) {
             a.setAttribute('href',obj[link]);
             a.innerHTML = link;
             row.appendChild(a);
-            a.animate(
-                [
-                  {
-                    // from
-                    opacity: 0,
-                  },
-                  {
-                    // to
-                    opacity: 1,
-                    color: "#000",
-                  },
-                ],
-                2000,
-              );
+            let run = 0;
+            
+            let interval = setInterval(() => {
+                let opacity = Number(a.style.opacity);
+                opacity += 0.2;
+                a.style.opacity = opacity;
+                run += 1;
+                if(run == 4) {
+                    clear()
+                }
+            },200)
+            function clear() {
+                clearInterval(interval);
+            }
+        }
+        let animatees = header.getElementsByTagName('a');
+        for(let animatee in animatees) {
+            
         }
         let exit_row = table.insertRow(-1);
         let exit_button = document.createElement('a');
