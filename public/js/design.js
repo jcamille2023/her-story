@@ -54,10 +54,6 @@ if (body.offsetWidth < navbar.offsetWidth) {
                 }
             },10);
         }
-        let animatees = header.getElementsByTagName('a');
-        for(let animatee in animatees) {
-            
-        }
         let exit_row = table.insertRow(-1);
         let exit_button = document.createElement('a');
         exit_button.href = "#"; 
@@ -81,6 +77,17 @@ else {
         a.setAttribute('href',obj[link]);
         a.innerHTML = link;
         navbar.appendChild(a);
+        let interval = setInterval(() => {
+            console.log("run");
+            let opacity = Number(a.style.opacity);
+            opacity += 0.02;
+            console.log(opacity);
+            a.style.opacity = opacity;
+            run += 1;
+            if(run >= 50) {
+                clearInterval(interval);
+            }
+        },10);
     }
 }
 }
