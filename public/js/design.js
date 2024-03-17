@@ -78,6 +78,7 @@ else {
         a.innerHTML = link;
         navbar.appendChild(a);
         let interval = setInterval(() => {
+            let run = 0;
             console.log("run");
             let opacity = Number(a.style.opacity);
             opacity += 0.02;
