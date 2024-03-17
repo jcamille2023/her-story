@@ -77,8 +77,8 @@ else {
         a.setAttribute('href',obj[link]);
         a.innerHTML = link;
         navbar.appendChild(a);
+        let run = 0;
         let interval = setInterval(() => {
-            let run = 0;
             console.log("run");
             let opacity = Number(a.style.opacity);
             opacity += 0.02;
