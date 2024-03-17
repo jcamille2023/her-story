@@ -42,19 +42,17 @@ if (body.offsetWidth < navbar.offsetWidth) {
             a.innerHTML = link;
             row.appendChild(a);
             let run = 0;
-            
             let interval = setInterval(() => {
+                console.log("run");
                 let opacity = Number(a.style.opacity);
-                opacity += 0.2;
+                opacity += 0.02;
+                console.log(opacity);
                 a.style.opacity = opacity;
                 run += 1;
-                if(run == 4) {
-                    clear()
+                if(run >= 50) {
+                    clearInterval(interval);
                 }
-            },200)
-            function clear() {
-                clearInterval(interval);
-            }
+            },10);
         }
         let animatees = header.getElementsByTagName('a');
         for(let animatee in animatees) {
