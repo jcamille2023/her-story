@@ -91,6 +91,6 @@ div.navbar > a:hover, table > tbody > tr > a:hover{
 
 }
 
-a {
-    animation: 2s normal slidein;
+.header > a {
+   opacity: 0;
 }
