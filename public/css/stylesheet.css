@@ -94,3 +94,8 @@ div.navbar > a:hover, table > tbody > tr > a:hover{
 .header > .navbar > a {
     opacity: 0;
  }
+
+ #content {
+    padding-right: 5%;
+    padding-left: 5%;
+}

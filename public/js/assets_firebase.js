@@ -23,6 +23,8 @@ const analytics = getAnalytics(app);
 const database = getDatabase();
 const dbRef = ref(database);
 
+
+// loads current header and logo in page
 get(child(dbRef, "/assets/")).then((snapshot) => {
   let data = snapshot.val();
   console.log(data);
@@ -36,6 +38,7 @@ get(child(dbRef, "/assets/")).then((snapshot) => {
   }
 });
 
+// loads current page links
 get(child(dbRef, "/urls/")).then((snapshot) => {
     let data = snapshot.val();
     data = Object.values(data);
