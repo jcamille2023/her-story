@@ -91,6 +91,6 @@ div.navbar > a:hover, table > tbody > tr > a:hover{
 
 }
 
-.header > a {
-   opacity: 0;
-}
+.header > .navbar > a {
+    opacity: 0;
+ }
