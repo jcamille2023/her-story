@@ -43,7 +43,53 @@ get(child(dbRef, "/posts/Blog")).then((snapshot) => {
         author.textContent = name;
         description.textContent = post.description;
         container.addEventListener('click', () => {
-          window.location.href = "read.html?type=blog&key="+key;
+          let parser = new DOMParser();
+          let body = document.body;
+          let blog_container = document.createElement('div');
+          let background = document.createElement('div');
+
+          background.style.zIndex = '9';
+          background.style.width = '100%';
+          background.style.height = '100%';
+          background.style.color = 'gray';
+          background.style.opacity = '0.5';
+          
+          // styling for container
+          blog_container.style.zIndex = '10';
+          blog_container.style.backgroundColor = 'rgb(42, 8, 59)';
+          blog_container.style.width = '80%';
+          blog_container.style.height = '80%';
+          blog_container.style.marginLeft = 'auto';
+          blog_container.style.marginRight = 'auto';
+          blog_container.style.color = 'white';
+
+          // creating html from content
+          let content = parser.parseFromString(post.content,'text/html');
+
+
+          // creating exit button
+          let exit_button = document.createElement('button');
+          exit_button.style.zIndex = "11";
+          exit_button.style.position = "absolute";
+          exit_button.style.top = "0";
+          exit_button.style.left = "0";
+          exit_button.style.padding = "20px";
+          exit_button.appendChild(document.createTextNode('Exit'));
+
+          exit_button.addEventListener('click', () => {
+            background.remove();
+            blog_container.remove();
+            exit_button.remove();
+          });
+          // appending details
+          blog_container.appendChild(h1);
+          blog_container.appendChild(author);
+          blog_container.appendChild(description);
+          blog_container.appendChild(content);
+          body.appendChild(background);
+          body.appendChild(blog_container);
+          body.appendChild(exit_button);
+
         });
         container.appendChild(h1);
         container.appendChild(author);

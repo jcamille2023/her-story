@@ -62,15 +62,32 @@ button {
     border: 2px solid #2a083b;
 }
 
-#socials {
-    color: black;
-    text-align: center;
-}
-#igblock {
-    text-align: center;
-}
-
 .logo {
     text-align: center;
 }
 
+#blogs {
+    display: grid;
+    grid-template-columns: repeat(3, fit-content(250px));
+    justify-content: space-evenly;
+    grid-gap: 5%;
+     
+}
+
+.blog {
+    text-align: left;
+    overflow: clip;
+    text-overflow: ellipsis;
+    max-height:40%;
+    width: auto;
+    padding:10%;
+    border: 2px solid #2a083b;
+    transition-duration: 0.25s;
+    transition-property: background-color;
+    transition-property: scale;
+}
+
+.blog:hover {
+    background-color: white;
+    scale: 1.05;
+}
