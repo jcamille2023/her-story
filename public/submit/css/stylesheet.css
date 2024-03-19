@@ -1,0 +1,54 @@
+/* #about-us > div {
+    display: flex;
+    position:absolute;
+    width:50%
+}
+
+#about-us > div.description {
+    position:absolute;
+    width:50%;
+    left:50%;
+} */
+
+#about-us {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5px;
+}
+
+div {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#header {
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top:5%;
+    padding-bottom:5%;
+}
+
+#about-us > div.description > button:hover {
+    background-color: #2a083b;
+    color: white;   
+}   
+
+button {
+    background-color: transparent;
+    color: black;
+    border: 2px solid #2a083b;
+}
+
+#socials {
+    color: black;
+    text-align: center;
+}
+#igblock {
+    text-align: center;
+}
+
+.logo {
+    text-align: center;
+}
+
