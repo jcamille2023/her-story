@@ -41,7 +41,7 @@ function submit(post) {
     let user_posts_ref = ref(database, 'users/' + uid + '/posts/'); // gets the reference to the user post folder
     let new_post_ref = push(posts_ref); // both create a new post in each folder
     let new_user_post_ref = push(user_posts_ref);
-    
+    post.key = new_post_ref.key;
     set(new_post_ref, post).then(() => {
         set(new_user_post_ref, post).then(() => {
             let key = new_post_ref.key;

@@ -25,10 +25,10 @@ const dbRef = ref(database);
 
 
 // loads current header and logo in page
-get(child(dbRef, "/posts/blog")).then((snapshot) => {
+get(child(dbRef, "/posts/Blog")).then((snapshot) => {
   let data = snapshot.val();
   data = Object.values(data);
-  for(post of data) {
+  for(let post of data) {
     get(child(dbRef, "users/" + post.creator)).then((udata) => {
         udata = udata.val();
         let name = udata.name;
