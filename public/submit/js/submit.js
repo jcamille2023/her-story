@@ -63,7 +63,10 @@ function display_step_2(post) {
     document.getElementById("input-container").appendChild(elements[0]);
     let button = document.createElement('button');
     button.textContent = "Submit";
-    button.addEventListener('click', () => {submit(post)});
+    button.addEventListener('click', () => {
+      post.content = elements[1].innerHTML;
+      submit(post);
+    });
     document.getElementById("input-container").appendChild(button);
 }
 
@@ -132,6 +135,9 @@ if (user) {
     container.appendChild(email_text);
     container.innerHTML += "<p>Is this information valid?</p>";
     container.innerHTML += '<table><tr><td><button onclick="valid()">Yes</button></td><td><button onclick="invalid()">No</button></td></tr></table>';
+    container.innerHTML += "<p>Press no only if the name on your Google account is not your actual name or there are multiple authors.</p>";
+    container.innerHTML += "<br>";
+    container.innerHTML += "<p>If your Google account name is not your real name, you can add your real name to HerStory by going to the settings page.</p>";
     
     
     // ...
