@@ -53,8 +53,9 @@ function submit() {
     let url = new URL(window.location.href);
     let key1 = url.searchParams.get('key1');
     let key2 = url.searchParams.get('key2');
-    let key1ref = ref(database, '/posts/' + key1 + '/content');
-    let key2ref = ref(database, '/posts/' + key2 + '/content');
+    let type = url.searchParams.get('type');
+    let key1ref = ref(database, '/posts/' + type + '/' + key1 + '/content');
+    let key2ref = ref(database, '/users/' + uid + '/posts' + key2 + '/content');
     set(key1ref, {content: content});
     set(key2ref, {content: content});
     submit_4();
@@ -80,7 +81,10 @@ onAuthStateChanged(auth, (user) => {
     // Submission files
     
     document.getElementById("input-container").appendChild(elements[0]);
-    document.getElementById("input-container").innerHTML += '<button onclick="submit()">Submit</button>';
+    let button = document.createElement('button');
+    button.textContent = "Submit";
+    button.addEventListener('click', submit);
+    document.getElementById("input-container").appendChild(button);
     
     
     // ...

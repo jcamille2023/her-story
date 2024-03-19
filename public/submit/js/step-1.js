@@ -54,7 +54,7 @@ function submit() {
         description: description,
         }).then(() => {
             let key2 = new_user_post_ref.key;
-            window.location.href = "step-2.html?key1="+key1+"&key2="+key2;
+            window.location.href = "step-2.html?type="+type+"&key1="+key1+"&key2="+key2;
         });
     
     });
