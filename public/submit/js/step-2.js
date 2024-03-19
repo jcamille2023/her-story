@@ -55,7 +55,7 @@ function submit() {
     let key2 = url.searchParams.get('key2');
     let type = url.searchParams.get('type');
     let key1ref = ref(database, '/posts/' + type + '/' + key1 + '/content');
-    let key2ref = ref(database, '/users/' + uid + '/posts' + key2 + '/content');
+    let key2ref = ref(database, '/users/' + uid + '/posts/' + key2 + '/content');
     set(key1ref, {content: content});
     set(key2ref, {content: content});
     submit_4();
