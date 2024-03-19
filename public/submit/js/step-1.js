@@ -24,17 +24,17 @@ const database = getDatabase(app);
 let container = document.getElementById("input-container");
 
 function logout() {
-signOut(auth).then(() => {
-console.log("User is signed out.");
-window.location.href = "https://herstory-9142d.firebaseapp.com";
-}).catch((error) => {
-// An error happened.
-});
+  signOut(auth).then(() => {
+  console.log("User is signed out.");
+  window.location.href = "https://herstory-9142d.firebaseapp.com";
+  }).catch((error) => {
+  // An error happened.
+  });
 }
 window.logout = logout;
 
 function submit() {
-    let types = document.getElementsById('format'); //
+    let types = document.getElementsByName('format'); //
     let type;
     for(type of types) {
       if(type.checked == true) {
@@ -84,34 +84,34 @@ window.valid = valid;
 
 onAuthStateChanged(auth, (user) => {
 if (user) {
-  // User is signed in, see docs for a list of available properties
-  // https://firebase.google.com/docs/reference/js/auth.user
-  window.user = user;
-  uid = user.uid;
-  console.log(uid);
-  console.log(user);
-  set(ref(database, 'users/' + uid), {
-    name: user.displayName,
-    email: user.email,
-  });
-  document.getElementById("display_name").innerHTML = user.displayName;
-  // Basic text to submit a new post
-  document.getElementById("text-container").innerHTML = "<h1>Let's get started!</h1>";
-  document.getElementById("text-container").innerHTML += "<br><h2>Basic Info</h2>";
-  document.getElementById("text-container").innerHTML += "<br>";
-  document.getElementById("text-container").innerHTML += "<p>Let's confirm a few details about your post.</p>";
-  // Details
-  var name_text = document.createElement("p");
-  name_text.textContent = "Name: " + user.displayName;
-  container.appendChild(name_text);
-  var email_text = document.createElement("p");
-  email_text.textContent = "Email: " + user.email;
-  container.appendChild(email_text);
-  container.innerHTML += "<p>Is this information valid?</p>";
-  container.innerHTML += '<table><tr><td><button onclick="valid()">Yes</button></td><td><button onclick="invalid()">No</button></td></tr></table>';
-  
-  
-  // ...
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/auth.user
+    window.user = user;
+    uid = user.uid;
+    console.log(uid);
+    console.log(user);
+    set(ref(database, 'users/' + uid), {
+      name: user.displayName,
+      email: user.email,
+    });
+    document.getElementById("display_name").innerHTML = user.displayName;
+    // Basic text to submit a new post
+    document.getElementById("text-container").innerHTML = "<h1>Let's get started!</h1>";
+    document.getElementById("text-container").innerHTML += "<br><h2>Basic Info</h2>";
+    document.getElementById("text-container").innerHTML += "<br>";
+    document.getElementById("text-container").innerHTML += "<p>Let's confirm a few details about your post.</p>";
+    // Details
+    var name_text = document.createElement("p");
+    name_text.textContent = "Name: " + user.displayName;
+    container.appendChild(name_text);
+    var email_text = document.createElement("p");
+    email_text.textContent = "Email: " + user.email;
+    container.appendChild(email_text);
+    container.innerHTML += "<p>Is this information valid?</p>";
+    container.innerHTML += '<table><tr><td><button onclick="valid()">Yes</button></td><td><button onclick="invalid()">No</button></td></tr></table>';
+    
+    
+    // ...
 } else {
   // User is signed out
   console.log("User is signed out");
