@@ -34,8 +34,15 @@ window.location.href = "https://herstory-9142d.firebaseapp.com";
 window.logout = logout;
 
 function submit() {
-    let types = document.getElementsByName('format'); //
-    let type = types[0].value == 'blog' ? 'blog' : 'interview'; // gets the type of post
+    let types = document.getElementsById('format'); //
+    let type;
+    for(type of types) {
+      if(type.checked == true) {
+        type = type.value;
+        break;
+      }
+    }
+    //let type = types[0].value == 'blog' ? 'blog' : 'interview'; // gets the type of post
     let posts_ref = ref(database, 'posts/' + type); // gets the reference to the folder with the type of post
     let user_posts_ref = ref(database, 'users/' + uid + '/posts/'); // gets the reference to the user post folder
     let new_post_ref = push(posts_ref); // both create a new post in each folder
