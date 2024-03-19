@@ -6,6 +6,7 @@ import {WebWrite} from 'https://jcamille2023.github.io/webwrite/webwrite.js';
 // https://firebase.google.com/docs/web/setup#available-libraries
 var user;
 var uid;
+let post;
 // Your web app's Firebase configuration
 const firebaseConfig = {
 apiKey: "AIzaSyCjNvzBC-xVZ0tW14acmAhLLH-kjizRIG4",
@@ -34,7 +35,39 @@ function logout() {
 }
 window.logout = logout;
 
-function submit() {
+function submit(post) {
+    //let type = types[0].value == 'blog' ? 'blog' : 'interview'; // gets the type of post
+    let posts_ref = ref(database, 'posts/' + post.type); // gets the reference to the folder with the type of post
+    let user_posts_ref = ref(database, 'users/' + uid + '/posts/'); // gets the reference to the user post folder
+    let new_post_ref = push(posts_ref); // both create a new post in each folder
+    let new_user_post_ref = push(user_posts_ref);
+    
+    set(new_post_ref, post).then(() => {
+        set(new_user_post_ref, post).then(() => {
+            let key = new_post_ref.key;
+            document.getElementById("text-container").innerHTML = "<h1>Congrats!</h1>";
+            document.getElementById("text-container").innerHTML += "<p>Your submission has been processed. </p>";
+            document.getElementById("text-container").innerHTML += "<p>You can sign out using the sign out button in the top right corner.</p>";
+            document.getElementById("input-container").innerHTML = "<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Eo_circle_green_checkmark.svg/1200px-Eo_circle_green_checkmark.svg.png' height='100px' width='100px'>";
+            document.getElementById("text-container").innerHTML += "<p>Submission key: " + key + "</p>";
+        });
+    });
+
+}
+window.submit = submit;
+
+function display_step_2(post) {
+    document.getElementById("text-container").innerHTML = "<h1>Write your post</h1>";
+    document.getElementById("text-container").innerHTML += "<p>Write the post that will be submitted here.</p>";
+    document.getElementById("text-container").innerHTML += "<p>Do not include the title, or a section for the author's name. Proceed with the post from the first paragraph.";
+    document.getElementById("input-container").appendChild(elements[0]);
+    let button = document.createElement('button');
+    button.textContent = "Submit";
+    button.addEventListener('click', () => {submit(post)});
+    document.getElementById("input-container").appendChild(button);
+}
+
+function save_details() {
     let types = document.getElementsByName('format'); //
     let type;
     for(type of types) {
@@ -43,32 +76,17 @@ function submit() {
         break;
       }
     }
-    //let type = types[0].value == 'blog' ? 'blog' : 'interview'; // gets the type of post
-    let posts_ref = ref(database, 'posts/' + type); // gets the reference to the folder with the type of post
-    let user_posts_ref = ref(database, 'users/' + uid + '/posts/'); // gets the reference to the user post folder
-    let new_post_ref = push(posts_ref); // both create a new post in each folder
-    let new_user_post_ref = push(user_posts_ref);
     let title = document.getElementById("title").value;
     let description = document.getElementById("description").value;
-    set(new_post_ref, { //sets the initial data for the new post
+    post = {
+        type: type,
         creator: uid,
         title: title,
         description: description,
-    }).then(() => {
-    let key1 = new_post_ref.key;
-    set(new_user_post_ref, {
-        creator: uid,
-        title: title,
-        description: description,
-        }).then(() => {
-            let key2 = new_user_post_ref.key;
-            window.location.href = "step-2.html?type="+type+"&key1="+key1+"&key2="+key2;
-        });
-    
-    });
-
+    };
+    display_step_2(post);
 }
-window.submit = submit;
+window.save_details = save_details;
 
 function valid() {
     container.innerHTML = "";
@@ -79,9 +97,13 @@ function valid() {
     container.innerHTML += "<p>Blog post or interview?</p>";
     container.innerHTML += '<input id="format_1" type="radio" name="format" value="Blog">Blog</input>';
     container.innerHTML += '<input id="format_2" type="radio" name="format" value="Interview">Interview</input>';
-    container.innerHTML += '<button id="submit" onclick=submit()>Submit</input>';
+    container.innerHTML += '<button id="save_details" onclick=save_details()>Submit</input>';
 }
 window.valid = valid;
+
+function invalid() {
+    console.log('click');
+}
 
 onAuthStateChanged(auth, (user) => {
 if (user) {

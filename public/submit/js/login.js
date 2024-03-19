@@ -57,7 +57,7 @@ onAuthStateChanged(auth, (user) => {
       name: user.displayName,
       email: user.email,
     });
-    window.location.href = 'step-1.html';
+    window.location.href = 'submit.html';
     
     // ...
   } else {
