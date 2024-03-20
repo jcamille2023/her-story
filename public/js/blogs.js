@@ -65,7 +65,8 @@ get(child(dbRef, "/posts/Blog")).then((snapshot) => {
 
           // creating html from content
           let content = parser.parseFromString(post.content,'text/html');
-
+          let iframe = document.createElement('iframe');
+          iframe.appendChild(content);
 
           // creating exit button
           let exit_button = document.createElement('button');
@@ -85,7 +86,7 @@ get(child(dbRef, "/posts/Blog")).then((snapshot) => {
           blog_container.appendChild(h1);
           blog_container.appendChild(author);
           blog_container.appendChild(description);
-          blog_container.appendChild(content);
+          blog_container.appendChild(iframe);
           body.appendChild(background);
           body.appendChild(blog_container);
           body.appendChild(exit_button);
