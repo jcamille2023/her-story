@@ -47,7 +47,12 @@ get(child(dbRef, "/posts/Blog")).then((snapshot) => {
           let body = document.body;
           let blog_container = document.createElement('div');
           let background = document.createElement('div');
-
+          let h1 = document.createElement('h1');
+          let author = document.createElement('p');
+          let description = document.createElement('p');
+          h1.textContent = post.title;
+          author.textContent = name;
+          description.textContent = post.description;
           background.style.zIndex = '9';
           background.style.width = '100%';
           background.style.height = '100%';
@@ -64,9 +69,9 @@ get(child(dbRef, "/posts/Blog")).then((snapshot) => {
           blog_container.style.color = 'white';
 
           // creating html from content
-          let content = parser.parseFromString(post.content,'text/html');
-          let iframe = document.createElement('iframe');
-          iframe.appendChild(content);
+          let content = data.content;
+          let content_container = document.createElement('div');
+          content_container.innerHTML = content;
 
           // creating exit button
           let exit_button = document.createElement('button');
@@ -86,7 +91,7 @@ get(child(dbRef, "/posts/Blog")).then((snapshot) => {
           blog_container.appendChild(h1);
           blog_container.appendChild(author);
           blog_container.appendChild(description);
-          blog_container.appendChild(iframe);
+          blog_container.appendChild(content_container);
           body.appendChild(background);
           body.appendChild(blog_container);
           body.appendChild(exit_button);
