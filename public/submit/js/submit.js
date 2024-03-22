@@ -57,10 +57,13 @@ function submit(post) {
 window.submit = submit;
 
 function display_step_2(post) {
+
     document.getElementById("text-container").innerHTML = "<h1>Write your post</h1>";
     document.getElementById("text-container").innerHTML += "<p>Write the post that will be submitted here.</p>";
     document.getElementById("text-container").innerHTML += "<p>Do not include the title, or a section for the author's name. Proceed with the post from the first paragraph.";
+    document.getElementById("input-container").innerHTML = "";
     document.getElementById("input-container").appendChild(elements[0]);
+    document.getElementById("input-container").style.width = "75%";
     let button = document.createElement('button');
     button.textContent = "Submit";
     button.addEventListener('click', () => {

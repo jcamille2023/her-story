@@ -66,7 +66,7 @@ get(child(dbRef, "/posts/Blog")).then((snapshot) => {
           blog_container.style.color = 'white';
 
           // creating html from content
-          let content = data.content;
+          let content = post.content;
           let content_container = document.createElement('div');
           content_container.innerHTML = content;
 
