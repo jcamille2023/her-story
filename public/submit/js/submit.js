@@ -23,7 +23,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
 let container = document.getElementById("input-container");
-let elements = WebWrite();
+let webwrite = new WebWrite();
+
 
 function logout() {
   signOut(auth).then(() => {
@@ -57,17 +58,17 @@ function submit(post) {
 window.submit = submit;
 
 function display_step_2(post) {
-
+    webwrite.enableImages();
     document.getElementById("text-container").innerHTML = "<h1>Write your post</h1>";
     document.getElementById("text-container").innerHTML += "<p>Write the post that will be submitted here.</p>";
     document.getElementById("text-container").innerHTML += "<p>Do not include the title, or a section for the author's name. Proceed with the post from the first paragraph.";
     document.getElementById("input-container").innerHTML = "";
-    document.getElementById("input-container").appendChild(elements[0]);
+    document.getElementById("input-container").appendChild(webwrite.container);
     document.getElementById("input-container").style.width = "75%";
     let button = document.createElement('button');
     button.textContent = "Submit";
     button.addEventListener('click', () => {
-      post.content = elements[1].innerHTML;
+      post.content = webwrite.content;
       submit(post);
     });
     document.getElementById("input-container").appendChild(button);
