@@ -38,10 +38,8 @@ get(child(dbRef, "/posts/Blog")).then((snapshot) => {
         // will add img code later
         let h1 = document.createElement('h1');
         let author = document.createElement('p');
-        let description = document.createElement('p');
         h1.textContent = post.title;
         author.textContent = name;
-        description.textContent = post.description;
         container.addEventListener('click', () => {
           let parser = new DOMParser();
           let body = document.body;
@@ -50,17 +48,18 @@ get(child(dbRef, "/posts/Blog")).then((snapshot) => {
           let author = document.createElement('p');
           let description = document.createElement('p');
           h1.textContent = post.title;
-          author.textContent = name;
+          author.textContent = "by " + name;
           description.textContent = post.description;
+          description.style.fontSize = "9px";
          
           // styling for container
           blog_container.style.zIndex = '10';
           blog_container.style.backgroundColor = 'rgb(42, 8, 59)';
-          blog_container.style.width = '80%';
+          blog_container.style.width = '100vw';
           blog_container.style.position = "absolute";
           blog_container.style.top = "0";
-          blog_container.style.padding = "20%";
-          blog_container.style.height = '80%';
+          blog_container.style.padding = "10%";
+          blog_container.style.height = '100vh'; 
           blog_container.style.marginLeft = 'auto';
           blog_container.style.marginRight = 'auto';
           blog_container.style.color = 'white';
@@ -96,7 +95,6 @@ get(child(dbRef, "/posts/Blog")).then((snapshot) => {
         });
         container.appendChild(h1);
         container.appendChild(author);
-        container.appendChild(description);
         let element = document.getElementById('blogs');
         element.appendChild(container);
 
