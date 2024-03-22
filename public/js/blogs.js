@@ -46,19 +46,13 @@ get(child(dbRef, "/posts/Blog")).then((snapshot) => {
           let parser = new DOMParser();
           let body = document.body;
           let blog_container = document.createElement('div');
-          let background = document.createElement('div');
           let h1 = document.createElement('h1');
           let author = document.createElement('p');
           let description = document.createElement('p');
           h1.textContent = post.title;
           author.textContent = name;
           description.textContent = post.description;
-          background.style.zIndex = '9';
-          background.style.width = '100%';
-          background.style.height = '100%';
-          background.style.color = 'gray';
-          background.style.opacity = '0.5';
-          
+         
           // styling for container
           blog_container.style.zIndex = '10';
           blog_container.style.backgroundColor = 'rgb(42, 8, 59)';
@@ -88,7 +82,6 @@ get(child(dbRef, "/posts/Blog")).then((snapshot) => {
           exit_button.appendChild(document.createTextNode('Exit'));
 
           exit_button.addEventListener('click', () => {
-            background.remove();
             blog_container.remove();
             exit_button.remove();
           });
@@ -97,7 +90,6 @@ get(child(dbRef, "/posts/Blog")).then((snapshot) => {
           blog_container.appendChild(author);
           blog_container.appendChild(description);
           blog_container.appendChild(content_container);
-          body.appendChild(background);
           body.appendChild(blog_container);
           body.appendChild(exit_button);
 
