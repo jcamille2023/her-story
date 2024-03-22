@@ -41,7 +41,6 @@ get(child(dbRef, "/posts/Blog")).then((snapshot) => {
         h1.textContent = post.title;
         author.textContent = name;
         container.addEventListener('click', () => {
-          let parser = new DOMParser();
           let body = document.body;
           let blog_container = document.createElement('div');
           let h1 = document.createElement('h1');
