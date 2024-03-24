@@ -37,6 +37,7 @@ function logout() {
 window.logout = logout;
 
 function submit(post) {
+  let submit_container = document.getElementById("submit-container");
     //let type = types[0].value == 'blog' ? 'blog' : 'interview'; // gets the type of post
     let posts_ref = ref(database, 'posts/' + post.type); // gets the reference to the folder with the type of post
     let user_posts_ref = ref(database, 'users/' + uid + '/posts/'); // gets the reference to the user post folder
@@ -46,11 +47,11 @@ function submit(post) {
     set(new_post_ref, post).then(() => {
         set(new_user_post_ref, post).then(() => {
             let key = new_post_ref.key;
-            document.getElementById("text-container").innerHTML = "<h1>Congrats!</h1>";
-            document.getElementById("text-container").innerHTML += "<p>Your submission has been processed. </p>";
-            document.getElementById("text-container").innerHTML += "<p>You can sign out using the sign out button in the top right corner.</p>";
-            document.getElementById("input-container").innerHTML = "<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Eo_circle_green_checkmark.svg/1200px-Eo_circle_green_checkmark.svg.png' height='100px' width='100px'>";
-            document.getElementById("text-container").innerHTML += "<p>Submission key: " + key + "</p>";
+            submit_container.innerHTML = "<h1>Congrats!</h1>";
+            submit_container.innerHTML += "<p>Your submission has been processed. </p>";
+            submit_container.innerHTML += "<p>You can sign out using the sign out button in the top right corner.</p>";
+            submit_container.innerHTML = "<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Eo_circle_green_checkmark.svg/1200px-Eo_circle_green_checkmark.svg.png' height='100px' width='100px'>";
+            submit_container.innerHTML += "<p>Submission key: " + key + "</p>";
         });
     });
 
@@ -58,20 +59,21 @@ function submit(post) {
 window.submit = submit;
 
 function display_step_2(post) {
+    let submit_container = document.getElementById("submit-container");
     webwrite.enableImages();
-    document.getElementById("text-container").innerHTML = "<h1>Write your post</h1>";
-    document.getElementById("text-container").innerHTML += "<p>Write the post that will be submitted here.</p>";
-    document.getElementById("text-container").innerHTML += "<p>Do not include the title, or a section for the author's name. Proceed with the post from the first paragraph.";
-    document.getElementById("input-container").innerHTML = "";
-    document.getElementById("input-container").appendChild(webwrite.container);
-    document.getElementById("input-container").style.width = "75%";
+    submit_container.innerHTML = "<h1>Write your post</h1>";
+    submit_container.innerHTML += "<p>Write the post that will be submitted here.</p>";
+    submit_container.innerHTML += "<p>Do not include the title, or a section for the author's name. Proceed with the post from the first paragraph.";
+    submit_container.innerHTML = "";
+    submit_container.appendChild(webwrite.container);
+    submit_container.style.width = "75%";
     let button = document.createElement('button');
     button.textContent = "Submit";
     button.addEventListener('click', () => {
       post.content = webwrite.content;
       submit(post);
-    });
-    document.getElementById("input-container").appendChild(button);
+    }); 
+    submit_container.appendChild(button);
 }
 
 function save_details() {
