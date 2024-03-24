@@ -71,6 +71,7 @@ function display_step_2(post) {
     button.textContent = "Submit";
     button.addEventListener('click', () => {
       post.content = webwrite.content;
+      console.log(webwrite.text_container);
       submit(post);
     }); 
     submit_container.appendChild(button);
