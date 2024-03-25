@@ -40,10 +40,10 @@ function submit(post) {
   let submit_container = document.getElementById("submit-container");
     //let type = types[0].value == 'blog' ? 'blog' : 'interview'; // gets the type of post
     let posts_ref = ref(database, 'posts/' + post.type); // gets the reference to the folder with the type of post
-    let user_posts_ref = ref(database, 'users/' + uid + '/posts/'); // gets the reference to the user post folder
     let new_post_ref = push(posts_ref); // both create a new post in each folder
-    let new_user_post_ref = push(user_posts_ref);
     post.key = new_post_ref.key;
+    let new_user_post_ref = ref(database, 'users/' + uid + '/posts/' + post.key); 
+    
     set(new_post_ref, post).then(() => {
         set(new_user_post_ref, post).then(() => {
             let key = new_post_ref.key;
@@ -64,7 +64,6 @@ function display_step_2(post) {
     submit_container.innerHTML = "<h1>Write your post</h1>";
     submit_container.innerHTML += "<p>Write the post that will be submitted here.</p>";
     submit_container.innerHTML += "<p>Do not include the title, or a section for the author's name. Proceed with the post from the first paragraph.";
-    submit_container.innerHTML = "";
     submit_container.appendChild(webwrite.container);
     submit_container.style.width = "75%";
     let button = document.createElement('button');
