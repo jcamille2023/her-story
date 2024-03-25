@@ -88,11 +88,14 @@ function save_details() {
     }
     let title = document.getElementById("title").value;
     let description = document.getElementById("description").value;
+    let date = new Date();
+    date = String(date);
     post = {
         type: type,
         creator: uid,
         title: title,
         description: description,
+        date: date,
     };
     display_step_2(post);
 }

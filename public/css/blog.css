@@ -78,7 +78,7 @@ button {
     text-align: left;
     overflow: clip;
     text-overflow: ellipsis;
-    max-height:40%;
+    max-height:200px;
     width: auto;
     padding:10%;
     border: 2px solid #2a083b;

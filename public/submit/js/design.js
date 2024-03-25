@@ -79,10 +79,8 @@ else {
         navbar.appendChild(a);
         let run = 0;
         let interval = setInterval(() => {
-            console.log("run");
             let opacity = Number(a.style.opacity);
             opacity += 0.02;
-            console.log(opacity);
             a.style.opacity = opacity;
             run += 1;
             if(run >= 50) {
