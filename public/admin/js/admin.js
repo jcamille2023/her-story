@@ -79,6 +79,10 @@ function post_handler(snapshot) {
     return snapshot.val();
 }
 
+function delete_post(reference) {
+    remove(reference);
+}
+
 async function posts_menu() {
     container.innerHTML = "";
     let user = auth.currentUser;
@@ -106,8 +110,9 @@ async function posts_menu() {
         let delete_button = document.createElement('button');
         delete_button.textContent = 'Remove post';
         delete_button.addEventListener('click', () => {
-            let ref = ref(database, '/users/' + uid + '/posts/' + post.key);
-            remove(ref);
+            let ref1 = ref(database, '/users/' + uid + '/posts/' + post.key);
+            delete_post(ref1);
+            container.innerHTML = "";
             posts_menu();
         });
 
