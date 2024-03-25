@@ -110,16 +110,13 @@ async function posts_menu() {
         let delete_button = document.createElement('button');
         delete_button.textContent = 'Remove post';
         delete_button.addEventListener('click', () => {
-            let ref1 = ref(database, '/users/' + uid + '/posts/' + post.key);
-            delete_post(ref1);
-            container.innerHTML = "";
-            posts_menu();
+            window.location.href = './remove.html?key='+key;
         });
 
         let edit_button = document.createElement('button');
         edit_button.textContent = 'Edit post';
         edit_button.addEventListener('click', () => {
-            window.location.href = './edit.html?key='+post.key;       
+            window.location.href = './edit.html?key='+post.key+"&type="+post.type;       
         });
 
         post_container.appendChild(post_title);
