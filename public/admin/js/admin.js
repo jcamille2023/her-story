@@ -22,7 +22,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
 const dbRef = ref(getDatabase());
-let container = document.getElementById('container');
+let container = document.getElementById('admin_container');
 
 function logout() {
   signOut(auth).then(() => {
@@ -36,6 +36,7 @@ window.logout = logout;
 
 
 function landingPage() {
+    let user = auth.currentUser;
     document.getElementById("display_name").innerHTML = "Hi, " + user.displayName + "!";
     document.getElementById("display_name").innerHTML += "<br><a href='javascript:logout()'>Logout</a>";
     
@@ -54,17 +55,28 @@ function landingPage() {
     options.appendChild(new_post);
 
     let manage_posts = document.createElement('button');
-    manage_posts.textContent('Manage your existing posts');
+    manage_posts.textContent = 'Manage your existing posts';
 
     manage_posts.addEventListener('click', posts_menu);
     
     let new_section = document.createElement('button');
     new_section.textContent = 'Add a new section to your page';
     new_section.addEventListener('click',() => {window.location.href = './create'});
+    options.appendChild(new_post);
+    options.appendChild(manage_posts);
+    options.appendChild(new_section);
+
+    container.appendChild(options);
 }
 
 function create_section() {
 
+}
+
+function post_handler(snapshot) {
+    console.log(snapshot);
+    console.log(snapshot.val());
+    return snapshot.val();
 }
 
 async function posts_menu() {
@@ -72,8 +84,8 @@ async function posts_menu() {
     let user = auth.currentUser;
     let uid = user.uid;
 
-    let posts = await get(child(dbRef, "/users/" + uid + "/posts/"));
-    posts = posts.val();
+    let posts = await get(child(dbRef, "/users/" + uid + "/posts/")).then(post_handler);
+  
     posts = Object.values(posts);
     let title = document.createElement('h1');
     title.textContent = "Manage your posts";
