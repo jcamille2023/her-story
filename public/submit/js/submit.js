@@ -22,6 +22,7 @@ measurementId: "G-9WV20CMFLM"
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
+const dbRef = ref(database);
 let container = document.getElementById("input-container");
 let webwrite = new WebWrite();
 
@@ -45,7 +46,7 @@ function submit(post) {
     let new_user_post_ref = ref(database, 'users/' + uid + '/posts/' + post.key); 
     let user_post = post;
     delete user_post['content'];
-    set(ref(database, 'content/' + key),{content: post.content});
+    set(ref(database, 'content/' + post.key),{content: post.content});
     set(new_post_ref, user_post).then(() => {
         set(new_user_post_ref, user_post).then(() => {
             let key = new_post_ref.key;
