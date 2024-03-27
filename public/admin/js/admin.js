@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
-import { getDatabase, set, ref, onValue, get, child, push, remove } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
+import { getDatabase, ref, onValue, get, child, push } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 var user;
@@ -79,10 +79,6 @@ function post_handler(snapshot) {
     return snapshot.val();
 }
 
-function delete_post(reference) {
-    remove(reference);
-}
-
 async function posts_menu() {
     container.innerHTML = "";
     let user = auth.currentUser;
@@ -138,11 +134,15 @@ if (user) {
     uid = user.uid;
     console.log(uid);
     console.log(user);
-    set(ref(database, 'users/' + uid), {
-      name: user.displayName,
-      email: user.email,
-    });
-    landingPage();
+    get(child(dbRef, "/users/" + uid)).then((snapshot) => {
+        if(snapshot.val() == null) {
+            window.location.href = '/onboarding.html';
+        }
+        else {
+            landingPage();
+        }
+    })
+    
 } else {
   // User is signed out
   console.log("User is signed out");

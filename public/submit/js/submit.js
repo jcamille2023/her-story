@@ -29,7 +29,7 @@ let webwrite = new WebWrite();
 function logout() {
   signOut(auth).then(() => {
   console.log("User is signed out.");
-  window.location.href = "https://herstory-9142d.firebaseapp.com";
+  window.location.href = "https://herstory-9124d.firebaseapp.com";
   }).catch((error) => {
   // An error happened.
   });
@@ -43,9 +43,11 @@ function submit(post) {
     let new_post_ref = push(posts_ref); // both create a new post in each folder
     post.key = new_post_ref.key;
     let new_user_post_ref = ref(database, 'users/' + uid + '/posts/' + post.key); 
-    
-    set(new_post_ref, post).then(() => {
-        set(new_user_post_ref, post).then(() => {
+    let user_post = post;
+    delete user_post['content'];
+    set(ref(database, 'content/' + key),{content: post.content});
+    set(new_post_ref, user_post).then(() => {
+        set(new_user_post_ref, user_post).then(() => {
             let key = new_post_ref.key;
             submit_container.innerHTML = "<h1>Congrats!</h1>";
             submit_container.innerHTML += "<p>Your submission has been processed. </p>";
@@ -54,6 +56,7 @@ function submit(post) {
             submit_container.innerHTML += "<p>Submission key: " + key + "</p>";
         });
     });
+
 
 }
 window.submit = submit;
@@ -70,7 +73,6 @@ function display_step_2(post) {
     button.textContent = "Submit";
     button.addEventListener('click', () => {
       post.content = webwrite.content();
-
       console.log(post);
       submit(post);
     }); 
@@ -78,6 +80,8 @@ function display_step_2(post) {
 }
 
 function save_details() {
+  get(child(dbRef, '/users/' + uid)).then((snapshot) => {
+    let udata = snapshot.val();
     let types = document.getElementsByName('format'); //
     let type;
     for(type of types) {
@@ -92,12 +96,13 @@ function save_details() {
     date = String(date);
     post = {
         type: type,
-        creator: uid,
+        creator_name: udata.name,
         title: title,
         description: description,
         date: date,
     };
     display_step_2(post);
+  });
 }
 window.save_details = save_details;
 
