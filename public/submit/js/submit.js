@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signOut, updateProfile} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
 import { getDatabase, set, ref, onValue, get, child, push } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
 import {WebWrite} from 'https://jcamille2023.github.io/webwrite/webwrite_oop.js';
 
@@ -29,10 +29,6 @@ onAuthStateChanged(auth, (user) => {
 function landing_page() {
     let user = auth.currentUser;
     let uid = user.uid;
-    set(ref(database, 'users/' + uid), {
-        name: user.displayName,
-        email: user.email,
-      });
       document.getElementById("display_name").innerHTML = user.displayName;
       // Basic text to submit a new post
       document.getElementById("text-container").innerHTML = "<h1>Let's get started!</h1>";
@@ -54,8 +50,53 @@ function landing_page() {
       
 }
 
+function invalid() {
+  let container = document.getElementById('input-container');
+  let user = auth.currentUser;
+
+  container.innerHTML = '';
+
+  let ele1 = document.createElement('p');
+  ele1.textContent = "Name";
+  container.appendChild(ele1);
+
+  
+  let name_input = document.createElement('input');
+  name_input.setAttribute('type','text');
+  name_input.value = user.displayName;
+  container.appendChild(name_input);
+
+  let ele2 = document.createElement('p');
+  ele2.textContent = "Email";
+  container.appendChild(ele2);
+  
+  let email_input = document.createElement('input');
+  email_input.setAttribute('type','text');
+  email_input.value = user.email;
+  container.appendChild(email_input);
+
+  let submit_button = document.createElement('button');
+  submit_button.textContent = 'Submit';
+  submit_button.addEventListener('click', () => {
+    updateProfile(user, {
+      displayName: name_input.value,
+      email: email_input.value,
+    }).then(valid).catch((err) => {
+      console.log(err);
+      container.appendChild(document.createTextNode('An error occured.'));
+    });
+  })
+  container.appendChild(submit_button);
+}
+window.invalid = invalid;
+
 function valid() {
+  
     let user = auth.currentUser;
+    set(ref(database, 'users/' + uid), {
+      name: user.displayName,
+      email: user.email,
+    });
     let container = document.getElementById('input-container');
     container.innerHTML = "";
 
