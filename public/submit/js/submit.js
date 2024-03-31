@@ -19,6 +19,7 @@ const auth = getAuth(app);
 const database = getDatabase(app);
 const dbRef = ref(database);
 let webwrite = new WebWrite();
+let creator = {};
 
 onAuthStateChanged(auth, (user) => {
     if(user) {
@@ -78,25 +79,30 @@ function invalid() {
   let submit_button = document.createElement('button');
   submit_button.textContent = 'Submit';
   submit_button.addEventListener('click', () => {
-    updateProfile(user, {
+    /* updateProfile(user, {
       displayName: name_input.value,
       email: email_input.value,
     }).then(valid).catch((err) => {
       console.log(err);
       container.appendChild(document.createTextNode('An error occured.'));
-    });
+    }); */
+    creator.name = name_input.value;
+    creator.email = email.input.value;
   })
   container.appendChild(submit_button);
 }
 window.invalid = invalid;
 
 function valid() {
-  
     let user = auth.currentUser;
     set(ref(database, 'users/' + uid), {
       name: user.displayName,
       email: user.email,
     });
+    if(Object.values(creator).length < 1) {
+      creator.name = user.displayName;
+      creator.email = user.email;
+    }
     let container = document.getElementById('input-container');
     container.innerHTML = "";
 
@@ -139,7 +145,7 @@ function valid() {
     submit_button.textContent = 'Submit';
     submit_button.addEventListener('click', () => {
         let post = {
-            creator: user.displayName,
+            creator: creator.name,
             date: String(new Date()),
             type: choice1.checked ? 'Blog' : choice2.checked ? 'Interview' : () => {throw err},
             title: input.value,
