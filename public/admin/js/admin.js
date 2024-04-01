@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
-import { getDatabase, ref, onValue, get, child, push } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
+import { getDatabase, ref, onValue, get, child, push, set } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 var user;
@@ -112,7 +112,36 @@ function add_contributor() {
             bio: bio.value,
             img_url: input3.value,
         };
-        let contributor_id
+        let contributor_id = Math.floor(Math.random(10000));
+        set(ref(database, '/members/' + contributor_id), obj).then(() => {
+            let window_title = document.createElement('h1');
+            window_title.textContent = 'Success';
+            let details = document.createElement('p');
+            details.textContent = 'The contributor ' + obj.name + 'has successfully been added.';
+            container.innerHTML = '';
+            container.appendChild(window_title);
+            container.appendChild(details);
+            let redirect = document.createElement('button');
+            redirect.textContent = 'Back to main menu';
+            redirect.addEventListener('click', landingPage);
+            container.appendChild(redirect);
+        }).catch((err) => {
+            let window_title = document.createElement('h1');
+            window_title.textContent = 'Error';
+            let details = document.createElement('p');
+            details.textContent = 'An error occured when adding the contributer';
+            container.innerHTML = '';
+            container.appendChild(window_title);
+            container.appendChild(details);
+            let redirect = document.createElement('button');
+            redirect.textContent = 'Back to main menu';
+            redirect.addEventListener('click', landingPage);
+            container.appendChild(redirect);
+            let error_info = document.createElement('p');
+            error_info.textContent = err;
+            container.appendChild(error_info);
+
+        });
     });
 }
 
