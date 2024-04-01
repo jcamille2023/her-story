@@ -40,7 +40,7 @@ function landingPage() {
     document.getElementById("display_name").innerHTML = "Hi, " + user.displayName + "!";
     document.getElementById("display_name").innerHTML += "<br><a href='javascript:logout()'>Logout</a>";
     
-
+    container.innerHTML = '';
     let pg_title = document.createElement('h1');
     pg_title.textContent = 'Manage your site';
     container.appendChild(pg_title);
@@ -66,11 +66,50 @@ function landingPage() {
     options.appendChild(manage_posts);
     options.appendChild(new_section);
 
+    let new_contributor = document.createElement('button');
+    new_contributor.textContent = 'Add a new site contributor';
+    new_contributor.addEventListener('click', add_contributor)
+
     container.appendChild(options);
 }
 
-function create_section() {
 
+function add_contributor() {
+    container.innerHTML = '';
+    let heading1 = document.createElement('h1');
+    heading1.textContent = 'Add a new contributor';
+    let ele1 = document.createElement('p');
+    ele1.textContent = 'Please note adding a new contributor here does not give them administrative or posting privileges.';
+
+    let ele2 = document.createElement('p');
+    ele2.textContent = 'Name'
+
+    let input1 = document.createElement('input');
+    input1.setAttribute('type','text');
+
+    let ele3 = document.createElement('p');
+    ele3.textContent = 'Role (i.e. Designer, Writer, etc)';
+
+    let input2 = document.createElement('input');
+    input2.setAttribute('type','text');
+
+    let ele4 = document.createElement('p');
+    ele4.textContent = 'Description';
+
+    let bio = document.createElement('textarea');
+
+    let ele5 = document.createElement('p');
+    ele5.textContent = "Paste a link to their picture or upload (not working yet) a picture below";
+
+    let input3 = document.createElement('input');
+    input3.setAttribute('type','text');
+
+    let submit_button = document.createElement('button');
+    submit_button.addEventListener('click', () => {
+        let obj = {
+            s
+        };
+    });
 }
 
 function post_handler(snapshot) {
