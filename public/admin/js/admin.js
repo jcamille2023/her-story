@@ -93,12 +93,12 @@ async function posts_menu() {
 
     let list_of_posts = document.createElement('div');
     list_of_posts.style.display = 'grid';
+    list_of_posts.setAttribute('id','posts');
     container.appendChild(list_of_posts);
     for(let post of posts) {
-        console.log(post);
+        console.log(post);  
         let post_container = document.createElement('div');
-        post_container.style.backgroundColor = 'black';
-        post_container.style.color = 'white';
+        post_container.setAttribute('class','post');
         
         let post_title = document.createElement('h4');
         post_title.textContent = post.title;
@@ -106,7 +106,7 @@ async function posts_menu() {
         let delete_button = document.createElement('button');
         delete_button.textContent = 'Remove post';
         delete_button.addEventListener('click', () => {
-            window.location.href = './remove.html?key='+key;
+            window.location.href = './remove.html?key='+post.key;
         });
 
         let edit_button = document.createElement('button');
