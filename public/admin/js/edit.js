@@ -26,21 +26,43 @@ onAuthStateChanged(auth, (user) => {
     if(user) {
         let url = new URL(window.location.href);
         let params = url.searchParams;
-        if(params['key'] && params['type']) {
-            let key = params['key'];
-            let type = params['type'];
-            ref1 = ref('/users/' + uid + "/posts/" + key);
-            ref2 = ref('/posts/' + type + '/' + key);
-            ref3 = ref('content/' + key);
-            valid(key);
+
+        if(params.get('key') != '') {
+            let key = params.get('key');
+            landing_page(key);
         }
         else {
             container.innerHTML += "<h1>There has been an error. Please try again</h1>";
         }
-        landing_page();
+        
     }
 });
-function invalid() {
+
+
+function landing_page(key) {
+    let user = auth.currentUser;
+    let uid = user.uid;
+      document.getElementById("display_name").innerHTML = user.displayName;
+      // Basic text to submit a new post
+      document.getElementById("text-container").innerHTML = "<h1>Let's get started!</h1>";
+      document.getElementById("text-container").innerHTML += "<br><h2>Basic Info</h2>";
+      document.getElementById("text-container").innerHTML += "<br>";
+      document.getElementById("text-container").innerHTML += "<p>Let's confirm a few details about your post.</p>";
+      // Details
+      var name_text = document.createElement("p");
+      name_text.textContent = "Name: " + user.displayName;
+      document.getElementById('input-container').appendChild(name_text);
+      var email_text = document.createElement("p");
+      email_text.textContent = "Email: " + user.email;
+      document.getElementById('input-container').appendChild(email_text);
+      document.getElementById('input-container').innerHTML += "<p>Is this information valid?</p>";
+      document.getElementById('input-container').innerHTML += `<table><tr><td><button onclick="valid('${key}')">Yes</button></td><td><button onclick="invalid('${key}')">No</button></td></tr></table>`;
+      document.getElementById('input-container').innerHTML += "<p>Press no only if the name on your Google account is not your actual name or there are multiple authors.</p>";
+      document.getElementById('input-container').innerHTML += "<br>";
+      document.getElementById('input-container').innerHTML += "<p>If your Google account name is not your real name, you can add your real name to HerStory by going to the settings page.</p>";
+      
+}
+function invalid(key) {
     let container = document.getElementById('input-container');
     let user = auth.currentUser;
   
@@ -70,7 +92,7 @@ function invalid() {
     submit_button.addEventListener('click', () => {
       creator.name = name_input.value;
       creator.email = email.input.value;
-      valid();
+      valid(key);
     })
     container.appendChild(submit_button);
   }
@@ -145,7 +167,7 @@ async function write_content(post) {
 
     container.appendChild(webwrite.container);
     let write_container = webwrite.text_container;
-    write_container.appendChild(content.content);
+    write_container.innerHTML += content.content;
 
     let submit_button = document.createElement('button');
     submit_button.textContent = 'Submit';
