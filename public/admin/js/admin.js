@@ -107,8 +107,12 @@ function add_contributor() {
     let submit_button = document.createElement('button');
     submit_button.addEventListener('click', () => {
         let obj = {
-            s
+            name: input1.value,
+            role: input2.value,
+            bio: bio.value,
+            img_url: input3.value,
         };
+        let contributor_id
     });
 }
 
