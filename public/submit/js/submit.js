@@ -95,6 +95,7 @@ window.invalid = invalid;
 
 function valid() {
     let user = auth.currentUser;
+    let uid = user.uid;
     set(ref(database, 'users/' + uid), {
       name: user.displayName,
       email: user.email,
