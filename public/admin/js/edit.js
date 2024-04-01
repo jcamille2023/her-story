@@ -168,6 +168,10 @@ async function write_content(post) {
     container.appendChild(webwrite.container);
     let write_container = webwrite.text_container;
     write_container.innerHTML += content.content;
+    let children = write_container.children;
+    for(let child of children) {
+        child.setAttribute('contenteditable','true');
+    }
 
     let submit_button = document.createElement('button');
     submit_button.textContent = 'Submit';
