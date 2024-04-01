@@ -205,8 +205,8 @@ function submit(post) {
             let key = new_post_ref.key;
             submit_container.innerHTML = "<h1>Congrats!</h1>";
             submit_container.innerHTML += "<p>Your submission has been processed. </p>";
-            submit_container.innerHTML += "<p>You can sign out using the sign out button in the top right corner.</p>";
-            submit_container.innerHTML = "<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Eo_circle_green_checkmark.svg/1200px-Eo_circle_green_checkmark.svg.png' height='100px' width='100px'>";
+            submit_container.innerHTML += "<a href='./admin.html'>Return to admin page</a>";
+            submit_container.innerHTML += "<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Eo_circle_green_checkmark.svg/1200px-Eo_circle_green_checkmark.svg.png' height='100px' width='100px'>";
             submit_container.innerHTML += "<p>Submission key: " + key + "</p>";
         });
     });
