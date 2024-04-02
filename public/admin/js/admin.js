@@ -69,7 +69,7 @@ function landingPage() {
     let new_contributor = document.createElement('button');
     new_contributor.textContent = 'Add a new site contributor';
     new_contributor.addEventListener('click', add_contributor)
-
+    options.appendChild(new_contributor);
     container.appendChild(options);
 }
 
