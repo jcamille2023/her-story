@@ -29,7 +29,7 @@ get(child(dbRef, "/posts/Blog")).then((snapshot) => {
   let data = snapshot.val();
   data = Object.values(data);
   for(let post of data) {
-        let name = post.creator_name;
+        let name = post.creator;
         let container = document.createElement('div');
         container.setAttribute('class','blog');
         let img = document.createElement('img');
