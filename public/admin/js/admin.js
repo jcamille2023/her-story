@@ -76,13 +76,15 @@ function landingPage() {
 
 function add_contributor() {
     container.innerHTML = '';
+
+
     let heading1 = document.createElement('h1');
     heading1.textContent = 'Add a new contributor';
     let ele1 = document.createElement('p');
     ele1.textContent = 'Please note adding a new contributor here does not give them administrative or posting privileges.';
-
+    
     let ele2 = document.createElement('p');
-    ele2.textContent = 'Name'
+    ele2.textContent = 'Name';
 
     let input1 = document.createElement('input');
     input1.setAttribute('type','text');
@@ -143,6 +145,10 @@ function add_contributor() {
 
         });
     });
+    let elets = [heading1, ele1, ele2, input1, ele3, input2,ele4,bio,ele5,input3,submit_button];
+    for(let ele in elets) {
+        container.appendChild(ele);
+    }
 }
 
 function post_handler(snapshot) {
@@ -155,13 +161,15 @@ async function posts_menu() {
     container.innerHTML = "";
     let user = auth.currentUser;
     let uid = user.uid;
-
-    let posts = await get(child(dbRef, "/users/" + uid + "/posts/")).then(post_handler);
-  
-    posts = Object.values(posts);
     let title = document.createElement('h1');
     title.textContent = "Manage your posts";
     container.appendChild(title);
+
+    try {
+    let posts = await get(child(dbRef, "/users/" + uid + "/posts/")).then(post_handler);
+  
+    posts = Object.values(posts);
+    
 
     let list_of_posts = document.createElement('div');
     list_of_posts.style.display = 'grid';
@@ -193,10 +201,23 @@ async function posts_menu() {
 
         list_of_posts.appendChild(post_container);
     }
+} catch(error) {
+    let errorText = document.createElement('p');
+    if (error.message == 'Cannot convert undefined or null to object') {
+        errorText.content = 'You have made no posts yet.';
+    }
+    else {
+        error.textContent = 'An error has occured.';
+    }
+    container.appendChild(errorText);
+}
+finally {
     let exit_button = document.createElement('button');
     exit_button.textContent = "Back to main menu";
     exit_button.addEventListener('click', landingPage);
     container.appendChild(exit_button);
+}
+    
 }
 onAuthStateChanged(auth, (user) => {
 if (user) {
