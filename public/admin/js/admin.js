@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
 import { getDatabase, ref, onValue, get, child, push, set } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
+import { newSection } from "./create";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 var user;
@@ -61,7 +62,7 @@ function landingPage() {
     
     let new_section = document.createElement('button');
     new_section.textContent = 'Add a new section to your page';
-    new_section.addEventListener('click',() => {window.location.href = './create'});
+    new_section.addEventListener('click',() => {newSection(container)});
     options.appendChild(new_post);
     options.appendChild(manage_posts);
     options.appendChild(new_section);
@@ -131,7 +132,7 @@ function add_contributor() {
             let window_title = document.createElement('h1');
             window_title.textContent = 'Error';
             let details = document.createElement('p');
-            details.textContent = 'An error occured when adding the contributer';
+            details.textContent = 'An error occured when adding the contributor';
             container.innerHTML = '';
             container.appendChild(window_title);
             container.appendChild(details);
