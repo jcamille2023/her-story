@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
 import { getDatabase, ref, onValue, get, child, push, set } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
-import {WebWrite} from 'https://jcamille2023.github.io/WebWrite/webwrite_oop.js';
+import {WebWrite} from 'https://jcamille2023.github.io/webwrite/webwrite_oop.js';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 var user;
